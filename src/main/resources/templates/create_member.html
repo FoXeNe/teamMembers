@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание Участника</title>
+
+    <link rel="stylesheet" href="/css/create_member.css">
+</head>
+<body>
+<div class="container">
+    <h2>Создать нового Участника</h2>
+    <div th:if="${successMessage}" class="message success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="message error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+
+    <form action="/api/members" method="post">
+        <div class="form-group">
+            <label for="name">Имя Участника:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <input type="hidden"
+               th:if="${_csrf}"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}" />
+
+        <button type="submit">Сохранить Участника</button>
+    </form>
+
+    <a href="/admin/dashboard" class="back-link">← Назад к Панели Управления</a>
+</div>
+</body>
+</html>

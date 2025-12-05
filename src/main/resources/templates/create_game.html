@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Создание Игры</title>
+    <link rel="stylesheet" href="/css/create_game.css">
+</head>
+<body>
+<div class="container">
+    <h2>Создание новой Игры</h2>
+
+    <div th:if="${successMessage}" class="message success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="message error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <form action="/api/games" method="post">
+        <div class="form-group">
+            <label for="name">Название Игры:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <input type="hidden"
+               th:if="${_csrf}"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}" />
+
+        <button type="submit">Сохранить Игру</button>
+    </form>
+
+    <a href="/admin/dashboard" class="back-link">← Вернуться на панель</a>
+</div>
+</body>
+</html>
